@@ -14,7 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import "./Navbar.css";
-import Logo from "../../Logo.jpg";
+import Logo from "../../market-analysis.png";
 import { useNavigate } from "react-router-dom";
 
 // import { logout } from "../store/auth/authSlice";
