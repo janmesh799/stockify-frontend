@@ -56,7 +56,7 @@ const Predict = () => {
   }
   return (
     <>
-      <Typography sx={{textAlign:"center"}} variant="h2"> Recommended Stocks are :</Typography>
+      <Typography sx={{textAlign:"center"}} variant="h3"> Recommended Stocks are :</Typography>
       <Container
         sx={{ margin: "1rem auto", display: "flex", flexWrap: "wrap", justifyContent:"center" }}
       >
