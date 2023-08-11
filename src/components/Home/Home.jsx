@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Box, TextField, FormControl, Typography } from "@mui/material";
+import { Box, TextField, FormControl, Typography, Button } from "@mui/material";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import {  useNavigate } from "react-router-dom";
 
 const style = {
   "@media (max-width: 480px)": {
@@ -26,17 +27,31 @@ const inputStyle = {
   marginTop: "0.75rem",
 };
 const Home = () => {
+  const navigate = useNavigate();
+
   const [creds, setCreds] = useState({
     principle: null,
     expectedDate: "",
     factor: null,
   });
+
   const [date, setDate] = useState(null);
+
   const handleOnChange = (e) => {
     const { id, value } = e.target;
     setCreds({ ...creds, [id]: value });
   };
-  const handleSubmit = () => {};
+
+  const submitHandler = () => {
+    if (!creds.principle || !creds.factor || !date) {
+      alert("Please fill all fields");
+      return false;
+    }
+    navigate(
+      `/predict?principle=${creds.principle}&factor=${creds.factor}&expectedDate=${date.toISOString()}`
+    );
+  };
+
   return (
     <Box sx={style}>
       <Typography
@@ -82,6 +97,15 @@ const Home = () => {
             onChange={(newValue) => setDate(newValue)}
           />
         </LocalizationProvider>
+        <Button
+          onClick={submitHandler}
+          type="submit"
+          color="secondary"
+          sx={{ width: "30%", margin: "auto", marginTop: "1.5rem" }}
+          variant="contained"
+        >
+          GO
+        </Button>
       </FormControl>
     </Box>
   );

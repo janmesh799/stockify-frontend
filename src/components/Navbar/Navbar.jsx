@@ -14,10 +14,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import "./Navbar.css";
-import Logo from "../../Logo.jpg"
-import { useSelector, useDispatch } from "react-redux";
+import Logo from "../../Logo.jpg";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 // import { logout } from "../store/auth/authSlice";
 
@@ -26,19 +24,8 @@ import { Link } from "react-router-dom";
 const drawerWidth = 240;
 
 function Navbar(props) {
-  const { user, isLoggedIn } = useSelector((state) => state.auth);
-  let username = null;
-  if (user) username = user.username;
-//   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logoutHandler = () => {
-    // dispatch(logout());
-  };
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      // dispatch(getUser());
-    }
-  }, [isLoggedIn]);
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -55,7 +42,7 @@ function Navbar(props) {
         <Link to="/">
           <img alt="logo" src={Logo} className="logo" />
         </Link>
-        PRO-PROFILE
+        STOCKIFY
       </Typography>
       <Divider />
       <List>
@@ -69,48 +56,17 @@ function Navbar(props) {
             <ListItemText primary={"HOME"} />
           </ListItemButton>
         </ListItem>
-        {isLoggedIn ? (
-          <>
-            <ListItem
-              onClick={() => {
-                navigate("/profile");
-              }}
-              disablePadding
-            >
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={username.toUpperCase()} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem onClick={logoutHandler} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={"LOGOUT"} />
-              </ListItemButton>
-            </ListItem>
-          </>
-        ) : (
-          <>
-            <ListItem
-              onClick={() => {
-                navigate("/login");
-              }}
-              disablePadding
-            >
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={"LOGIN"} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem
-              onClick={() => {
-                navigate("/signup");
-              }}
-              disablePadding
-            >
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={"SIGNUP"} />
-              </ListItemButton>
-            </ListItem>
-          </>
-        )}
+
+        <ListItem
+          onClick={() => {
+            navigate("/about");
+          }}
+          disablePadding
+        >
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemText primary={"ABOUT PROJECT"} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
@@ -140,63 +96,32 @@ function Navbar(props) {
               </Link>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {isLoggedIn ? (
-                <>
-                  <Link to="/profile">
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      sx={{
-                        color: "#fff",
-                        fontSize: "1.25rem",
-                        margin: "0rem 0.5rem",
-                      }}
-                    >
-                      {username.toUpperCase()}
-                    </Button>
-                  </Link>
-                  <Link onClick={logoutHandler} to="/">
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      sx={{
-                        color: "#fff",
-                        fontSize: "1.25rem",
-                        margin: "0rem 0.5rem",
-                      }}
-                    >
-                      LOGOUT
-                    </Button>
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link to="/login">
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "#fff",
-                        fontSize: "1.25rem",
-                        margin: "0rem 0.5rem",
-                      }}
-                    >
-                      LOGIN
-                    </Button>
-                  </Link>
-                  <Link to="/signup">
-                    <Button
-                      variant="contained"
-                      sx={{
-                        color: "#fff",
-                        fontSize: "1.25rem",
-                        margin: "0rem 0.5rem",
-                      }}
-                    >
-                      SIGNUP
-                    </Button>
-                  </Link>
-                </>
-              )}
+              <Link to="/">
+                <Button
+                  color="primary"
+                  variant="contained"
+                  sx={{
+                    color: "#fff",
+                    fontSize: "1.25rem",
+                    margin: "0rem 0.5rem",
+                  }}
+                >
+                  HOME
+                </Button>
+              </Link>
+              <Link to="/about">
+                <Button
+                  color="primary"
+                  variant="contained"
+                  sx={{
+                    color: "#fff",
+                    fontSize: "1.25rem",
+                    margin: "0rem 0.5rem",
+                  }}
+                >
+                  ABOUT PROJECT
+                </Button>
+              </Link>
             </Box>
           </Toolbar>
         </AppBar>
@@ -224,7 +149,6 @@ function Navbar(props) {
           <Toolbar />
         </Box>
       </Box>
-      
     </>
   );
 }
