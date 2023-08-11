@@ -85,7 +85,7 @@ const Home = () => {
           value={creds.factor}
           name="factor"
           id="factor"
-          label="factor"
+          label="cummulative calculation factor"
           variant="filled"
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
