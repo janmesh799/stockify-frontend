@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Stocks from "../Stocks/Stocks";
 import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
+import { TailSpin } from "react-loader-spinner";
+import './Predict.css'
 
 const Predict = () => {
   const params = new URLSearchParams(useLocation().search);
@@ -36,7 +38,21 @@ const Predict = () => {
   }, [principle, factor, date]);
 
   if (apiData === null) {
-    return <div>Calculating Data</div>;
+    return (
+      <div className="loader">
+        <TailSpin
+          height="160"
+          width="160"
+          color="#5271FF"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+        <img src="../../market-analysis.png" alt="logo" className="loader_logo"/>
+      </div>
+    )
   }
   return (
     <>
